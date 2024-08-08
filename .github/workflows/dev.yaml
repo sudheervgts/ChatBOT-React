@@ -23,3 +23,10 @@ jobs:
     steps:
       - name: Installing Dependencies
         run: pnpm install
+
+  Deploy:
+    runs-on: homeyhuts-dev
+    needs: Build
+    steps:
+      - name: Restarting Systemd Service
+        run: sudo service chatbot-react-dev restart

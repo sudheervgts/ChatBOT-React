@@ -32,6 +32,7 @@
 
 .message-container {
   width: 100%;
+  line-height: 150%;
 }
 
 .bot-message {
@@ -39,7 +40,7 @@
   padding: 15px 20px;
   margin: 5px;
   border-radius: 20px 20px 20px 1px;
-  background: #00aaa5;
+  background: rebeccapurple;
   color: white;
   min-width: 10px;
   white-space: break-spaces;
