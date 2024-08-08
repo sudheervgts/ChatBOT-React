@@ -6,7 +6,8 @@
   text-align: center;
   display: flex;
   flex-flow: column;
-  width: 500px;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -22,11 +23,11 @@
 
 .messages {
   width: 100%;
-  height: 400px;
+  height: 100%;
   overflow: auto;
   display: flex;
   flex-direction: column;
-  padding: 10px 0px;
+  padding: 10px;
 }
 
 .message-container {
@@ -40,7 +41,9 @@
   border-radius: 20px 20px 20px 1px;
   background: #00aaa5;
   color: white;
-  min-width: 40px;
+  min-width: 10px;
+  white-space: break-spaces;
+  text-align: left;
 }
 
 .user-message {
@@ -60,9 +63,6 @@
   font-family: monospace;
   font-size: 16px;
   border: 0;
-  border-radius: 0;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
   border-top: 1px solid #eee;
   box-shadow: none;
   box-sizing: border-box;

@@ -14,16 +14,18 @@ import Header from "./components/Header";
 function Chatbot() {
   const [messages, setMessages] = useState([]);
 
+
   useEffect(() => {
     async function loadWelcomeMessage() {
+      // console.log(this.header)
       setMessages([
         <BotMessage
           key="0"
-          fetchMessage={async () => await API.GetChatbotResponse("hi")}
+          fetchMessage={async () => await API.GetChatbotResponse(null)}
         />
       ]);
     }
-    loadWelcomeMessage();
+    loadWelcomeMessage().then(r => null);
   }, []);
 
   const send = async text => {

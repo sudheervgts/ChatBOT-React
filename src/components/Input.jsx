@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 export default function Input({ onSend }) {
-  const [text, setText] = useState("");
+  const [text, setText] = useState("")
 
   const handleInputChange = e => {
     setText(e.target.value);
@@ -22,7 +22,7 @@ export default function Input({ onSend }) {
           value={text}
           placeholder="Enter your message here"
         />
-        <button>
+        <button disabled={text === ""}>
           <svg
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
