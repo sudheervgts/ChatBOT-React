@@ -13,27 +13,47 @@ import Header from "./components/Header";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
+  const [passcode , setPasscode] = useState(null);
+  const [inputDisabled, setInputDisabled] = useState(true);
+  const [socket, setSocket] = useState(null);
 
+  useEffect(() => {
+    async function getPasscode() {
+      if (!passcode) {
+        const value = prompt("Enter Passcode");
+        if (value !== "" && value != null) {
+          setPasscode(value);
+        }
+      }
+    }
+    getPasscode().then(r => null);
+  }, []);
 
   useEffect(() => {
     async function loadWelcomeMessage() {
-      // console.log(this.header)
-      setMessages([
-        <BotMessage
-          key="0"
-          fetchMessage={async () => await API.GetChatbotResponse(null)}
-        />
-      ]);
+      if (passcode) {
+        const socket = await new WebSocket(`ws://13.235.166.171:8001/v1/chat/?sec-websocket-authorization=${passcode}`)
+        setSocket(socket)
+        setMessages([
+          <BotMessage
+              key={messages.length + 1}
+              fetchMessage={async () => await API.GetChatbotResponse(socket, null, setInputDisabled)}
+          />
+        ]);
+      }
     }
-    loadWelcomeMessage().then(r => null);
-  }, []);
+    if (passcode) {
+      loadWelcomeMessage();
+    }
+  }, [passcode]);  // Trigger this effect when passcode changes
+
 
   const send = async text => {
     const newMessages = messages.concat(
       <UserMessage key={messages.length + 1} text={text} />,
       <BotMessage
         key={messages.length + 2}
-        fetchMessage={async () => await API.GetChatbotResponse(text)}
+        fetchMessage={async () => await API.GetChatbotResponse(socket,text, setInputDisabled)}
       />
     );
     setMessages(newMessages);
@@ -43,7 +63,7 @@ function Chatbot() {
     <div className="chatbot">
       <Header />
       <Messages messages={messages} />
-      <Input onSend={send} />
+      <Input onSend={send} disabled={inputDisabled} />
     </div>
   );
 }

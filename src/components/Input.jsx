@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function Input({ onSend }) {
+export default function Input({ onSend, disabled }) {
   const [text, setText] = useState("")
 
   const handleInputChange = e => {
@@ -21,6 +21,7 @@ export default function Input({ onSend }) {
           onChange={handleInputChange}
           value={text}
           placeholder="Enter your message here"
+          disabled={disabled}
         />
         <button disabled={text === ""}>
           <svg
