@@ -60,6 +60,8 @@
 
 .input {
   position: relative;
+  border-top: 2px solid black;
+  padding-top: 2%;
 }
 
 .input > form > input[type="text"] {

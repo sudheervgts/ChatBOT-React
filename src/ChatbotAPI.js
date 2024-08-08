@@ -4,12 +4,12 @@ const API = {
   GetChatbotResponse: async (socket, message, setInputState) => {
     if (message) {
       socket.send(message)
-      setInputState(true)
+      setInputState(false)
     }
     return new Promise((resolve, reject) => {
       socket.onmessage = (e) => {
         resolve(e.data)
-        setInputState(false)
+        setInputState(true)
       }
       socket.onerror = (e) => {
         alert("Invalid Passcode")

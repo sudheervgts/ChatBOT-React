@@ -14,7 +14,7 @@ import Header from "./components/Header";
 function Chatbot() {
   const [messages, setMessages] = useState([]);
   const [passcode , setPasscode] = useState(null);
-  const [inputDisabled, setInputDisabled] = useState(true);
+  const [inputDisabled, setInputDisabled] = useState(false);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
@@ -63,7 +63,7 @@ function Chatbot() {
     <div className="chatbot">
       <Header />
       <Messages messages={messages} />
-      <Input onSend={send} disabled={inputDisabled} />
+      <Input onSend={send} canShowInput={inputDisabled} />
     </div>
   );
 }
