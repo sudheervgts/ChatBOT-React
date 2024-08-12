@@ -20,7 +20,7 @@ function Chatbot() {
   useEffect(() => {
     async function getPasscode() {
       if (!passcode) {
-        const value = prompt("Enter Passcode", "4c546730303452b76d9ba73b152959f99e840f232aa408af442fd4a6da6273015293fbd8cda14af56f1fc28595d685e04b15618546b33b7e2c3fef3fbbbe85d1");
+        const value = prompt("Enter Passcode");
         if (value !== "" && value != null) {
           setPasscode(value);
         }
@@ -32,7 +32,7 @@ function Chatbot() {
   useEffect(() => {
     async function loadWelcomeMessage() {
       if (passcode) {
-        const socket = await new WebSocket(`ws://13.235.166.171:8001/v1/chat/?sec-websocket-authorization=${passcode}`)
+        const socket = await new WebSocket(`ws://127.0.0.1:8000/v1/chat/?sec-websocket-authorization=${passcode}`)
         setSocket(socket)
         setMessages([
           <BotMessage
