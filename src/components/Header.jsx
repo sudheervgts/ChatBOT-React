@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Header() {
-  return <div className="header">HomeyHuts ChatBOT</div>;
+  return <div className="header">Surgtest ChatBOT</div>;
 }
