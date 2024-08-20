@@ -13,26 +13,26 @@ import Header from "./components/Header";
 
 function Chatbot() {
   const [messages, setMessages] = useState([]);
-  const [passcode , setPasscode] = useState(null);
+  const [sessionId , setSessionID] = useState(null);
   const [inputDisabled, setInputDisabled] = useState(false);
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    async function getPasscode() {
-      if (!passcode) {
-        const value = prompt("Enter Passcode", "4c546730303452b76d9ba73b152959f99e840f232aa408af442fd4a6da6273015293fbd8cda14af56f1fc28595d685e04b15618546b33b7e2c3fef3fbbbe85d1");
+    async function getSessionID() {
+      if (!sessionId) {
+        const value = prompt("Enter Session ID");
         if (value !== "" && value != null) {
-          setPasscode(value);
+          setSessionID(value);
         }
       }
     }
-    getPasscode().then(r => null);
+    getSessionID().then(r => null);
   }, []);
 
   useEffect(() => {
     async function loadWelcomeMessage() {
-      if (passcode) {
-        const socket = await new WebSocket(`ws://13.235.166.171:8001/v1/chat/?sec-websocket-authorization=${passcode}`)
+      if (sessionId) {
+        const socket = await new WebSocket(`ws://13.235.166.171:8001/v2/chat/${sessionId}/`)
         setSocket(socket)
         setMessages([
           <BotMessage
@@ -42,10 +42,10 @@ function Chatbot() {
         ]);
       }
     }
-    if (passcode) {
-      loadWelcomeMessage();
+    if (sessionId) {
+      loadWelcomeMessage().then((r => null));
     }
-  }, [passcode]);  // Trigger this effect when passcode changes
+  }, [sessionId]);
 
 
   const send = async text => {
